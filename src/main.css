@@ -1,0 +1,146 @@
+/*
+  elm-hot creates an additional div wrapper around the app to make HMR possible.
+  This could break styling in development mode if you are using Elm UI.
+
+  More context in the issue:
+    https://github.com/halfzebra/create-elm-app/issues/320
+*/
+[data-elm-hot='true'] {
+  height: inherit;
+}
+
+body {
+  font-family: 'Source Sans Pro', 'Trebuchet MS', 'Lucida Grande', 'Bitstream Vera Sans',
+    'Helvetica Neue', sans-serif;
+  margin: 0;
+  text-align: center;
+  color: #293c4b;
+  background: #f4f8fb;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+.overlay-black {
+  background-color: #00000061;
+}
+.logo {
+  margin: 0;
+  max-width: 140px;
+}
+
+.header {
+  padding: 0 4vw;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background: #090a0b no-repeat 50%;
+  background-size: cover;
+}
+
+.header:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  display: block;
+}
+
+.footer {
+  padding: 0 4vw;
+  background: #090a0b no-repeat 50%;
+}
+
+.footer-inner {
+  margin: 0 auto;
+  max-width: 1040px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+}
+
+.inner {
+  margin: 0 auto;
+  max-width: 1040px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 15vh;
+  padding-bottom: 15vh;
+}
+
+.description {
+  color: #fff;
+  font-family: sans-serif;
+  font-weight: lighter;
+  opacity: 0.8;
+}
+
+.footer-description {
+  color: #fff;
+  font-family: sans-serif;
+  font-weight: lighter;
+  opacity: 0.8;
+  font-size: 1vw;
+}
+
+.first-post:hover {
+  box-shadow: 10px 14px 40px #868484ed;
+}
+
+.first-post {
+  border: transparent 1px solid;
+  margin-top: -70px;
+  border-radius: 15px;
+  background-color: transparent;
+  box-shadow: 10px 14px 30px #8e8e8e47;
+}
+
+.content-center {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.border-radius {
+  border-radius: 15px;
+}
+
+.post-list {
+  margin: 10vh 0;
+}
+
+.post-card:hover {
+  box-shadow: 5px 5px 15px #868484ed;
+}
+
+.post-card {
+  border: 1px solid #efefef;
+  background-color: transparent;
+  border-radius: 5px;
+  width: 18rem;
+  margin: 1vh;
+  box-shadow: 5px 5px 6px #cccccc75;
+}
+
+@media screen and (max-width: 822px) {
+  .hide-content {
+    display: none;
+  }
+  .content-center {
+  }
+  .center-title {
+    display: flex;
+    justify-content: center;
+    padding: 8vh 0px;
+  }
+}
