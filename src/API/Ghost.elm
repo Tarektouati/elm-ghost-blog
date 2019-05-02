@@ -1,4 +1,4 @@
-module API.Ghost exposing (Endpoint, Post, Settings, defualtSettings, getPosts, getSettings)
+module API.Ghost exposing (Endpoint, Post, Settings, defualtSettings, getPost, getPosts, getSettings)
 
 import Http
 import Json.Decode exposing (Decoder, field)

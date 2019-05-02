@@ -1,9 +1,10 @@
 module View.Posts exposing (initialPostView, postListView)
 
 import API.Ghost exposing (Post)
-import Html exposing (Html, div, h2, h3, h5, img, p, span, text)
-import Html.Attributes exposing (class, src, style)
+import Html exposing (Html, a, div, h2, h3, h5, img, p, span, text)
+import Html.Attributes exposing (class, href, src, style)
 import List
+import View.Utils exposing (createLink)
 
 
 initialPostView : Maybe Post -> Html msg
@@ -22,15 +23,17 @@ noPostView =
 
 
 firstPostView : Post -> Html msg
-firstPostView { title, feature_image, custom_excerpt } =
-    div [ class "row" ]
+firstPostView { title, feature_image, custom_excerpt, id } =
+    div [ class "row no-margin" ]
         [ div [ class "col" ] []
         , div [ class "col-5 align-self-center" ]
-            [ div [ class "card  text-white first-post" ]
-                [ img [ src feature_image, class "card-img border-radius" ] []
-                , div [ class "card-img-overlay overlay-black border-radius content-center" ]
-                    [ h2 [ class "card-title center-title " ] [ text title ]
-                    , span [ class "card-text hide-content" ] [ text custom_excerpt ]
+            [ a [ href (createLink id) ]
+                [ div [ class "card  text-white first-post" ]
+                    [ img [ src feature_image, class "card-img border-radius" ] []
+                    , div [ class "card-img-overlay overlay-black border-radius content-center" ]
+                        [ h2 [ class "card-title center-title " ] [ text title ]
+                        , span [ class "card-text hide-content" ] [ text custom_excerpt ]
+                        ]
                     ]
                 ]
             ]
@@ -51,13 +54,15 @@ postListView posts =
 
 
 simplePostView : Post -> Html msg
-simplePostView { feature_image, title, custom_excerpt } =
+simplePostView { feature_image, title, custom_excerpt, id } =
     div [ class "col s12 m4" ]
-        [ div [ class "card post-card" ]
-            [ img [ src feature_image, class "card-img-top" ] []
-            , div [ class "card-body" ]
-                [ h5 [ class "card-title" ] [ text title ]
-                , p [ class "card-text" ] [ text custom_excerpt ]
+        [ a [ href (createLink id) ]
+            [ div [ class "card post-card" ]
+                [ img [ src feature_image, class "card-img-top" ] []
+                , div [ class "card-body" ]
+                    [ h5 [ class "card-title" ] [ text title ]
+                    , p [ class "card-text" ] [ text custom_excerpt ]
+                    ]
                 ]
             ]
         ]

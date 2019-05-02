@@ -32,8 +32,6 @@ h1 {
 
 .header {
   padding: 0 4vw;
-  padding-top: 15px;
-  padding-bottom: 15px;
   background: #090a0b no-repeat 50%;
   background-size: cover;
 }
@@ -48,9 +46,62 @@ h1 {
   display: block;
 }
 
+.header .inner {
+  margin: 0 auto;
+  max-width: 1040px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+}
+
+.header .inner .logo {
+  margin: 0;
+  max-width: 100px;
+}
+
+.home-header {
+  padding: 0 4vw;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background: #090a0b no-repeat 50%;
+  background-size: cover;
+}
+
+.home-header:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  display: block;
+}
+.home-header .inner {
+  margin: 0 auto;
+  max-width: 1040px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 15vh;
+  padding-bottom: 15vh;
+}
+
 .footer {
   padding: 0 4vw;
   background: #090a0b no-repeat 50%;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+.no-margin {
+  margin: 0;
 }
 
 .footer-inner {
@@ -61,20 +112,8 @@ h1 {
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  padding-top: 5vh;
-  padding-bottom: 5vh;
-}
-
-.inner {
-  margin: 0 auto;
-  max-width: 1040px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding-top: 15vh;
-  padding-bottom: 15vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
 }
 
 .description {
@@ -143,4 +182,24 @@ h1 {
     justify-content: center;
     padding: 8vh 0px;
   }
+}
+
+.notfound-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.notfound-block .notfound-error {
+  font-size: 12.3vw;
+  font-weight: bolder;
+  color: #d2d4d6;
+  font-family: sans-serif;
+}
+
+.notfound-block .notfound-content {
+  font-size: 3vw;
+  font-weight: lighter;
+  color: #88898a;
 }
