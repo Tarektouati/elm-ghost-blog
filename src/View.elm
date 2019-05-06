@@ -1,13 +1,14 @@
 module View exposing (view)
 
 import API.Ghost exposing (Post)
-import Html exposing (Html, div, h1, img, text)
-import Html.Attributes exposing (src)
+import Browser exposing (Document)
+import Html exposing (Html)
 import List
+import Pages.Article exposing (articlePage)
+import Pages.Home exposing (home)
+import Pages.Notfound exposing (notfound)
+import Router exposing (Route(..))
 import Types exposing (Model)
-import View.Footer exposing (footer)
-import View.Header exposing (header)
-import View.Posts exposing (initialPostView, postListView)
 
 
 getFirstPost : List Post -> Maybe Post
@@ -20,10 +21,19 @@ getPostsRest posts =
     List.tail posts
 
 
-view : Model -> Html msg
+view : Model -> Browser.Document msg
 view model =
-    div []
-        [ header model.settings
-        , div [] [ initialPostView (getFirstPost model.posts), postListView (getPostsRest model.posts) ]
-        , footer model.settings
-        ]
+    case model.url of
+        Home ->
+            home model.settings model.posts
+
+        Article id ->
+            case model.post of
+                Nothing ->
+                    notfound model.settings
+
+                Just post ->
+                    articlePage model.settings post
+
+        Notfound ->
+            notfound model.settings
