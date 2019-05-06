@@ -1,6 +1,6 @@
 module Update exposing (update)
 
-import API.Ghost exposing (getPost, getPosts)
+import API.Ghost exposing (Endpoint, getPost, getPosts)
 import Browser
 import Browser.Navigation as Nav
 import List
@@ -24,7 +24,7 @@ update msg model =
         GotSettings response ->
             case response of
                 Ok settings ->
-                    ( { model | settings = settings }, getPosts model.api GotPosts )
+                    ( { model | settings = settings }, fetchDataByRoute model.url model.api )
 
                 Err _ ->
                     ( model, Cmd.none )
@@ -51,13 +51,18 @@ update msg model =
                     fromUrl url
             in
             ( { model | url = route }
-            , case route of
-                Home ->
-                    getPosts model.api GotPosts
-
-                Article id ->
-                    getPost id model.api GotPost
-
-                Notfound ->
-                    Cmd.none
+            , fetchDataByRoute route model.api
             )
+
+
+fetchDataByRoute : Route -> Endpoint -> Cmd Msg
+fetchDataByRoute route api =
+    case route of
+        Home ->
+            getPosts api GotPosts
+
+        Article id ->
+            getPost id api GotPost
+
+        Notfound ->
+            Cmd.none
