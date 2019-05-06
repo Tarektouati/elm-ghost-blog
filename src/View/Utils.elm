@@ -9,3 +9,5 @@ backgourndImage coverImage =
 createLink : String -> String
 createLink id =
     "/article/" ++ id
+
+

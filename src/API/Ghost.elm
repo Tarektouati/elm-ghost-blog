@@ -1,4 +1,4 @@
-module API.Ghost exposing (Endpoint, Post, Settings, defualtSettings, getPost, getPosts, getSettings)
+module API.Ghost exposing (Author, Endpoint, Post, Settings, defualtSettings, getPost, getPosts, getSettings)
 
 import Http
 import Json.Decode exposing (Decoder, field)
@@ -10,6 +10,14 @@ type alias Settings =
     , cover_image : String
     , lang : String
     , logo : String
+    }
+
+
+type alias Author =
+    { id : String
+    , name : String
+    , profile_image : String
+    , bio : String
     }
 
 
@@ -28,6 +36,8 @@ type alias Post =
     , feature_image : String
     , id : String
     , custom_excerpt : String
+    , html : String
+    , authors : List Author
     }
 
 
@@ -56,13 +66,24 @@ settingsDecoder =
     Json.Decode.at [ "settings" ] decoder
 
 
+authorDecoder : Decoder Author
+authorDecoder =
+    Json.Decode.map4 Author
+        (field "id" Json.Decode.string)
+        (field "name" Json.Decode.string)
+        (field "profile_image" Json.Decode.string)
+        (field "bio" Json.Decode.string)
+
+
 postDecoder : Decoder Post
 postDecoder =
-    Json.Decode.map4 Post
+    Json.Decode.map6 Post
         (field "title" Json.Decode.string)
         (field "feature_image" Json.Decode.string)
         (field "id" Json.Decode.string)
         (field "custom_excerpt" Json.Decode.string)
+        (field "html" Json.Decode.string)
+        (Json.Decode.at [ "authors" ] (Json.Decode.list authorDecoder))
 
 
 postsDecoder : Decoder (List Post)
@@ -81,6 +102,7 @@ getPosts endpoint toMsg =
             urlBuilder
                 endpoint
                 "/content/posts/"
+                ++ "&include=authors"
         , expect = Http.expectJson toMsg postsDecoder
         }
 
@@ -103,5 +125,6 @@ getPost id endpoint toMsg =
             urlBuilder
                 endpoint
                 ("/content/posts/" ++ id)
+                ++ "&include=authors"
         , expect = Http.expectJson toMsg postsDecoder
         }

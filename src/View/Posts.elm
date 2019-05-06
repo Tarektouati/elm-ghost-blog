@@ -56,7 +56,7 @@ postListView posts =
 simplePostView : Post -> Html msg
 simplePostView { feature_image, title, custom_excerpt, id } =
     div [ class "col s12 m4" ]
-        [ a [ href (createLink id) ]
+        [ a [ href (createLink id), class "post-card-link" ]
             [ div [ class "card post-card" ]
                 [ img [ src feature_image, class "card-img-top" ] []
                 , div [ class "card-body" ]
